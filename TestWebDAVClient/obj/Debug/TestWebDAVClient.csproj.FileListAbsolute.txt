@@ -6,3 +6,11 @@ D:\Code\GitHub\WebDAVClient\TestWebDAVClient\bin\Debug\WebDAVClient.pdb
 D:\Code\GitHub\WebDAVClient\TestWebDAVClient\obj\Debug\TestWebDAVClient.exe
 D:\Code\GitHub\WebDAVClient\TestWebDAVClient\obj\Debug\TestWebDAVClient.pdb
 D:\Code\GitHub\WebDAVClient\TestWebDAVClient\bin\Debug\TestWebDAVClient.exe.config
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\bin\Debug\TestWebDAVClient.exe.config
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\bin\Debug\TestWebDAVClient.exe
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\bin\Debug\TestWebDAVClient.pdb
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\bin\Debug\WebDAVClient.dll
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\bin\Debug\WebDAVClient.pdb
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\obj\Debug\TestWebDAVClient.csprojResolveAssemblyReference.cache
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\obj\Debug\TestWebDAVClient.exe
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\TestWebDAVClient\obj\Debug\TestWebDAVClient.pdb
