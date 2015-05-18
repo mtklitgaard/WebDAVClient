@@ -18,3 +18,5 @@ C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\bin\Debug\System.Net.Ht
 C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\obj\Debug\WebDAVClient.csprojResolveAssemblyReference.cache
 C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\obj\Debug\WebDAVClient.dll
 C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\obj\Debug\WebDAVClient.pdb
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\obj\Debug\WebDAVClient.csproj.App.config
+C:\Users\mklitgaa\Source\Repos\WebDAVClient\WebDAVClient\bin\Debug\WebDAVClient.dll.config
