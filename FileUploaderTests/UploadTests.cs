@@ -51,6 +51,20 @@ namespace FileUploaderTests
 
                 _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));
                 _webDAVOperator.Verify(x => x.CreateDir(It.Is<string>(y => y.Equals("/")), expectedRootFolder));
+            }   
+            
+            [Test]
+            public void StripsOffTheDriveLetterWhenTheDriveLetterIsNotC_OnWebDAVOperator()
+            {
+                var expectedRootFolder = "TestUpload";
+                var pathToDir = @"E:\" + expectedRootFolder;
+                var expected = new List<string>();
+                _directoryWrapper.Setup(x => x.GetSubDirectoriesAndFiles(pathToDir)).Returns(expected);
+                
+                _classUnderTest.Upload(pathToDir);
+
+                _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));
+                _webDAVOperator.Verify(x => x.CreateDir(It.Is<string>(y => y.Equals("/")), expectedRootFolder));
             }
         }
     }
