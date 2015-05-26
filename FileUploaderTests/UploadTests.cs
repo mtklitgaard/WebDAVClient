@@ -34,12 +34,6 @@ namespace FileUploaderTests
                 _classUnderTest.Upload(pathToDir);
 
                 _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));
-
-                //String[] allfiles = Directory.GetFiles(pathToDir, "*.*", SearchOption.AllDirectories);
-                //foreach (var allfile in allfiles)
-                //{
-                //    var filepath = allfile;
-                //}
             }
         }
     }

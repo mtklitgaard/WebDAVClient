@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\DirectoryWrapper.cs" />
     <Compile Include="Interfaces\IDirectoryWrapper.cs" />
     <Compile Include="UploadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
