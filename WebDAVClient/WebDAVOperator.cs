@@ -13,7 +13,7 @@ using WebDAVClient.Model;
 
 namespace WebDAVClient
 {
-    public class WebDAVOperator
+    public class WebDAVOperator : IWebDAVOperator
     {
         private readonly IServerAdapter _serverAdapter;
 
