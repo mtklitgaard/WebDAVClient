@@ -15,7 +15,6 @@ namespace FileUploaderTests
         private UploadFiles _classUnderTest;
         private Mock<IDirectoryWrapper> _directoryWrapper;
         private Mock<IWebDAVOperator> _webDAVOperator;
-        private Mock<IServerAdapter> _serverAdapter;
 
 
         [SetUp]
@@ -23,8 +22,7 @@ namespace FileUploaderTests
         {
             _directoryWrapper = new Mock<IDirectoryWrapper>();
             _webDAVOperator = new Mock<IWebDAVOperator>();
-            _serverAdapter = new Mock<IServerAdapter>();
-            _classUnderTest = new UploadFiles(_directoryWrapper.Object);
+            _classUnderTest = new UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object);
         }
 
         public class Upload : UploadTests
@@ -42,15 +40,17 @@ namespace FileUploaderTests
             }
 
             [Test]
-            public void CreatesRootDirectory_OnWebDAVOperator()
+            public void CreatesRootDirectoryByStrippingOffTheDriveLetter_OnWebDAVOperator()
             {
-                var pathToDir = @"C:\TestUpload";
+                var expectedRootFolder = "TestUpload";
+                var pathToDir = @"C:\" + expectedRootFolder;
                 var expected = new List<string>();
                 _directoryWrapper.Setup(x => x.GetSubDirectoriesAndFiles(pathToDir)).Returns(expected);
-
+                
                 _classUnderTest.Upload(pathToDir);
 
-                _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));   
+                _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));
+                _webDAVOperator.Verify(x => x.CreateDir(It.Is<string>(y => y.Equals("/")), expectedRootFolder));
             }
         }
     }
