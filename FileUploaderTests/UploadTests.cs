@@ -33,11 +33,11 @@ namespace FileUploaderTests
             {
                 var pathToDir = @"C:\TestUpload";
                 var expected = new List<string>();
-                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+                _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
 
                 _classUnderTest.Upload(pathToDir);
 
-                _directoryWrapper.Verify(x => x.GetSubDirectoriesAndFiles(pathToDir));
+                _directoryWrapper.Verify(x => x.GetTopDirectories(pathToDir));
             }
 
             [Test]
@@ -46,7 +46,7 @@ namespace FileUploaderTests
                 var expectedRootFolder = "TestUpload";
                 var pathToDir = @"C:\" + expectedRootFolder;
                 var expected = new List<string>();
-                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+                _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
                 
                 _classUnderTest.Upload(pathToDir);
 
@@ -59,7 +59,7 @@ namespace FileUploaderTests
                 var expectedRootFolder = "TestUpload";
                 var pathToDir = @"E:\" + expectedRootFolder;
                 var expected = new List<string>();
-                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+                _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
                 
                 _classUnderTest.Upload(pathToDir);
 
@@ -76,7 +76,7 @@ namespace FileUploaderTests
                     "C:\\TestUpload\\folder2",
                     "C:\\TestUpload\\New folder"
                 };
-                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+                _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
                 
                 _classUnderTest.Upload(pathToDir);
                 
@@ -89,17 +89,51 @@ namespace FileUploaderTests
             {
                 var expectedRootFolder = "TestUpload";
                 var pathToDir = @"C:\" + expectedRootFolder;
-                var expected = new List<string>
+                 var expected1 = new List<string>
                 {
-                    "C:\\TestUpload\\folder2",
+                    "C:\\TestUpload\\folder2"
+                };
+
+                var expected2 = new List<string>
+                {
                     "C:\\TestUpload\\folder2\\New folder"
                 };
-                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+
+                _directoryWrapper.SetupSequence(x => x.GetTopDirectories(It.IsAny<string>())).Returns(expected1).Returns(expected2);
                 
                 _classUnderTest.Upload(pathToDir);
                 
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
+            } 
+            
+            [Test]
+            public void CallCreateDirectoriesIfMoreDirectoriesExist_WhenFolderSubdirectoryIsMoreThanOneDeep()
+            {
+                var expectedRootFolder = "TestUpload";
+                var pathToDir = @"C:\" + expectedRootFolder;
+                var expected1 = new List<string>
+                {
+                    "C:\\TestUpload\\folder2"
+                };
+
+                var expected2 = new List<string>
+                {
+                    "C:\\TestUpload\\folder2\\New folder"
+                };
+
+                var expected3 = new List<string>
+                {
+                     "C:\\TestUpload\\folder2\\New folder\\Test"
+                };
+                   
+                _directoryWrapper.SetupSequence(x => x.GetTopDirectories(It.IsAny<string>())).Returns(expected1).Returns(expected2).Returns(expected3);
+                
+                _classUnderTest.Upload(pathToDir);
+                
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2\\New folder", "Test"));
             }
         }
     }

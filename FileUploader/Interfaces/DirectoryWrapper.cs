@@ -11,9 +11,9 @@ namespace FileUploader.Interfaces
             return Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories).ToList();
         }  
         
-        public List<string> GetDirectories(string directoryPath)
+        public List<string> GetTopDirectories(string directoryPath)
         {
-            return Directory.GetDirectories(directoryPath, "*.*", SearchOption.AllDirectories).ToList();
+            return Directory.GetDirectories(directoryPath, "*.*", SearchOption.TopDirectoryOnly).ToList();
         }
     }
 }
