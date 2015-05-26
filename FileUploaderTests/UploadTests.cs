@@ -82,7 +82,24 @@ namespace FileUploaderTests
                 
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "New folder"));
-
+            } 
+            
+            [Test]
+            public void CallsCreateDirectoryOnEveryDirectoryUnderTheRoot_WhenFolderSubdirectoryIsMoreThanOneDeep()
+            {
+                var expectedRootFolder = "TestUpload";
+                var pathToDir = @"C:\" + expectedRootFolder;
+                var expected = new List<string>
+                {
+                    "C:\\TestUpload\\folder2",
+                    "C:\\TestUpload\\folder2\\New folder"
+                };
+                _directoryWrapper.Setup(x => x.GetDirectories(pathToDir)).Returns(expected);
+                
+                _classUnderTest.Upload(pathToDir);
+                
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
             }
         }
     }
