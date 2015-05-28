@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\DirectoryWrapper.cs" />
     <Compile Include="Interfaces\IDirectoryWrapper.cs" />
+    <Compile Include="Interfaces\IFileCreator.cs" />
     <Compile Include="UploadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

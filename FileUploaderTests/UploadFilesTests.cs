@@ -6,6 +6,7 @@ using FileUploader;
 using FileUploader.Interfaces;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using WebDAVClient.Interfaces;
 
 namespace FileUploaderTests
@@ -16,6 +17,7 @@ namespace FileUploaderTests
         private FileUploader.UploadFiles _classUnderTest;
         private Mock<IDirectoryWrapper> _directoryWrapper;
         private Mock<IWebDAVOperator> _webDAVOperator;
+        private Mock<IFileCreator> _fileCreator;
 
 
         [SetUp]
@@ -23,7 +25,8 @@ namespace FileUploaderTests
         {
             _directoryWrapper = new Mock<IDirectoryWrapper>();
             _webDAVOperator = new Mock<IWebDAVOperator>();
-            _classUnderTest = new FileUploader.UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object);
+            _fileCreator = new Mock<IFileCreator>();
+            _classUnderTest = new FileUploader.UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object, _fileCreator.Object);
         }
 
         public class UploadFiles : UploadFilesTests
@@ -135,6 +138,23 @@ namespace FileUploaderTests
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2\\New folder", "Test"));
             }
+
+            [Test]
+            public void CallsFileCreatorWithDirectory()
+            {
+                var expectedRootFolder = "TestUpload";
+                var pathToDir = @"C:\" + expectedRootFolder;
+                var expected = new List<string>
+                {
+                    "C:\\TestUpload\\folder2"
+                };
+                _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
+                
+                _classUnderTest.Upload(pathToDir);
+
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
+                _fileCreator.Verify(x => x.Upload(expected[0]));
+            } 
         }
     }
 }
