@@ -11,9 +11,9 @@ using WebDAVClient.Interfaces;
 namespace FileUploaderTests
 {
     [TestFixture]
-    public class UploadTests
+    public class UploadFilesTests
     {
-        private UploadFiles _classUnderTest;
+        private FileUploader.UploadFiles _classUnderTest;
         private Mock<IDirectoryWrapper> _directoryWrapper;
         private Mock<IWebDAVOperator> _webDAVOperator;
 
@@ -23,10 +23,10 @@ namespace FileUploaderTests
         {
             _directoryWrapper = new Mock<IDirectoryWrapper>();
             _webDAVOperator = new Mock<IWebDAVOperator>();
-            _classUnderTest = new UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object);
+            _classUnderTest = new FileUploader.UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object);
         }
 
-        public class Upload : UploadTests
+        public class UploadFiles : UploadFilesTests
         {
             [Test]
             public void CallsGetDirectories_FromDirectoryWrapper()
