@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateClientAndUpload.cs" />
     <Compile Include="FileCreator.cs" />
     <Compile Include="Interfaces\DirectoryUtilityWrapper.cs" />
     <Compile Include="Interfaces\IDirectoryUtilityWrapper.cs" />
