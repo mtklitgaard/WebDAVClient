@@ -2,6 +2,6 @@ namespace FileUploader.Interfaces
 {
     public interface IFileCreator
     {
-        void Upload(string directory);
+        void Upload(string directory, string uploadFolder);
     }
 }

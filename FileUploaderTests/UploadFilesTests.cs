@@ -138,17 +138,18 @@ namespace FileUploaderTests
             public void CallsFileCreatorWithDirectory_InOrderToStartTheFileUploadProcess()
             {
                 var expectedRootFolder = "TestUpload";
+                var uploadFolder = expectedRootFolder + "\\" + "folder2";
                 var pathToDir = @"C:\" + expectedRootFolder;
                 var expected = new List<string>
                 {
                     "C:\\TestUpload\\folder2"
                 };
                 _directoryWrapper.Setup(x => x.GetTopDirectories(pathToDir)).Returns(expected);
-                
+
                 _classUnderTest.Upload(pathToDir);
 
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
-                _fileCreator.Verify(x => x.Upload(expected[0]));
+                _fileCreator.Verify(x => x.Upload(expected[0], uploadFolder));
             } 
         }
     }

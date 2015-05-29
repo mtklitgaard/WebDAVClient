@@ -15,5 +15,15 @@ namespace FileUploader.Interfaces
         {
             return Directory.GetDirectories(directoryPath, "*.*", SearchOption.TopDirectoryOnly).ToList();
         }
+
+        public List<string> GetAllFiles(string directoryPath)
+        {
+            return Directory.GetFiles(directoryPath).ToList();
+        }
+
+        public Stream GetFileStream(string fileLocation)
+        {
+            return File.OpenRead(fileLocation);
+        }
     }
 }
