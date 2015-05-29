@@ -3,7 +3,7 @@ using System.IO;
 
 namespace FileUploader.Interfaces
 {
-    public interface IDirectoryWrapper
+    public interface IDirectoryUtilityWrapper
     {
         List<string> GetSubDirectoriesAndFiles(string directoryPath);
         List<string> GetTopDirectories(string directoryPath);

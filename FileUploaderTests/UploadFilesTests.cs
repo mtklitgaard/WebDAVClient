@@ -10,7 +10,7 @@ namespace FileUploaderTests
     public class UploadFilesTests
     {
         private FileUploader.UploadFiles _classUnderTest;
-        private Mock<IDirectoryWrapper> _directoryWrapper;
+        private Mock<IDirectoryUtilityWrapper> _directoryWrapper;
         private Mock<IWebDAVOperator> _webDAVOperator;
         private Mock<IFileCreator> _fileCreator;
 
@@ -18,7 +18,7 @@ namespace FileUploaderTests
         [SetUp]
         public void Setup()
         {
-            _directoryWrapper = new Mock<IDirectoryWrapper>();
+            _directoryWrapper = new Mock<IDirectoryUtilityWrapper>();
             _webDAVOperator = new Mock<IWebDAVOperator>();
             _fileCreator = new Mock<IFileCreator>();
             _classUnderTest = new FileUploader.UploadFiles(_directoryWrapper.Object, _webDAVOperator.Object, _fileCreator.Object);

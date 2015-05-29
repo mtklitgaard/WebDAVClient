@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileCreator.cs" />
-    <Compile Include="Interfaces\DirectoryWrapper.cs" />
-    <Compile Include="Interfaces\IDirectoryWrapper.cs" />
+    <Compile Include="Interfaces\DirectoryUtilityWrapper.cs" />
+    <Compile Include="Interfaces\IDirectoryUtilityWrapper.cs" />
     <Compile Include="Interfaces\IFileCreator.cs" />
     <Compile Include="UploadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,21 +7,21 @@ namespace FileUploader
     public class FileCreator : IFileCreator
     {
         private readonly IWebDAVOperator _webDavOperator;
-        private readonly IDirectoryWrapper _directoryWrapper;
+        private readonly IDirectoryUtilityWrapper _directoryUtilityWrapper;
 
-        public FileCreator(IWebDAVOperator webDavOperator, IDirectoryWrapper directoryWrapper)
+        public FileCreator(IWebDAVOperator webDavOperator, IDirectoryUtilityWrapper directoryUtilityWrapper)
         {
             _webDavOperator = webDavOperator;
-            _directoryWrapper = directoryWrapper;
+            _directoryUtilityWrapper = directoryUtilityWrapper;
         }
 
         public void Upload(string directory, string uploadFolder)
         {
-            var files = _directoryWrapper.GetAllFiles(directory);
+            var files = _directoryUtilityWrapper.GetAllFiles(directory);
 
             foreach (var file in files)
             {
-                var fileStream = _directoryWrapper.GetFileStream(file);
+                var fileStream = _directoryUtilityWrapper.GetFileStream(file);
                 var fileName = file.Split('\\').Last();
 
                 _webDavOperator.Upload(directory, fileStream, fileName);

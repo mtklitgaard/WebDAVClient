@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FileUploader.Interfaces
 {
-    public class DirectoryWrapper : IDirectoryWrapper
+    public class DirectoryUtilityWrapper : IDirectoryUtilityWrapper
     {
         public List<string> GetSubDirectoriesAndFiles(string directoryPath)
         {
