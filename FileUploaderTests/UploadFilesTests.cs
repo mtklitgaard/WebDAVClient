@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using FileUploader;
+﻿using System.Collections.Generic;
 using FileUploader.Interfaces;
 using Moq;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using WebDAVClient.Interfaces;
 
 namespace FileUploaderTests
@@ -140,7 +135,7 @@ namespace FileUploaderTests
             }
 
             [Test]
-            public void CallsFileCreatorWithDirectory()
+            public void CallsFileCreatorWithDirectory_InOrderToStartTheFileUploadProcess()
             {
                 var expectedRootFolder = "TestUpload";
                 var pathToDir = @"C:\" + expectedRootFolder;
