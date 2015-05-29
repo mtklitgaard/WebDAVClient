@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileCreatorTests.cs" />
+    <Compile Include="FileUploadIntegrationTests.cs" />
     <Compile Include="UploadFilesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

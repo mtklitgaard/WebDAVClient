@@ -24,7 +24,7 @@ namespace FileUploader
                 var fileStream = _directoryUtilityWrapper.GetFileStream(file);
                 var fileName = file.Split('\\').Last();
 
-                _webDavOperator.Upload(directory, fileStream, fileName);
+                _webDavOperator.Upload(uploadFolder + "\\", fileStream, fileName);
             }
         }
     }

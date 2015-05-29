@@ -67,7 +67,7 @@ namespace FileUploaderTests
             [Test]
             public void CallsCreateDirectoryOnEveryDirectoryUnderTheRoot()
             {
-                var expectedRootFolder = "TestUpload";
+                var expectedRootFolder = "TestUpload\\";
                 var pathToDir = @"C:\" + expectedRootFolder;
                 var expected = new List<string>
                 {
@@ -85,7 +85,7 @@ namespace FileUploaderTests
             [Test]
             public void CallsCreateDirectoryOnEveryDirectoryUnderTheRoot_WhenFolderSubdirectoryIsMoreThanOneDeep()
             {
-                var expectedRootFolder = "TestUpload";
+                var expectedRootFolder = "TestUpload\\";
                 var pathToDir = @"C:\" + expectedRootFolder;
                  var expected1 = new List<string>
                 {
@@ -102,13 +102,13 @@ namespace FileUploaderTests
                 _classUnderTest.Upload(pathToDir);
                 
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
-                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "folder2\\", "New folder"));
             } 
             
             [Test]
             public void CallCreateDirectoriesIfMoreDirectoriesExist_WhenFolderSubdirectoryIsMoreThanOneDeep()
             {
-                var expectedRootFolder = "TestUpload";
+                var expectedRootFolder = "TestUpload\\";
                 var pathToDir = @"C:\" + expectedRootFolder;
                 var expected1 = new List<string>
                 {
@@ -130,15 +130,15 @@ namespace FileUploaderTests
                 _classUnderTest.Upload(pathToDir);
                 
                 _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder, "folder2"));
-                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2", "New folder"));
-                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "\\folder2\\New folder", "Test"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "folder2\\", "New folder"));
+                _webDAVOperator.Verify(x => x.CreateDir(expectedRootFolder + "folder2\\New folder\\", "Test"));
             }
 
             [Test]
             public void CallsFileCreatorWithDirectory_InOrderToStartTheFileUploadProcess()
             {
-                var expectedRootFolder = "TestUpload";
-                var uploadFolder = expectedRootFolder + "\\" + "folder2";
+                var expectedRootFolder = "TestUpload\\";
+                var uploadFolder = expectedRootFolder + "folder2" ;
                 var pathToDir = @"C:\" + expectedRootFolder;
                 var expected = new List<string>
                 {
